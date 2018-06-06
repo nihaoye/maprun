@@ -11,6 +11,7 @@
   "dependencies": {
     "fs-extra": "^6.0.1",
     "gm": "^1.23.1",
+    "node-smushit": "^0.5.1",
     "path": "^0.12.7",
     "walker": "^1.0.7"
   }
