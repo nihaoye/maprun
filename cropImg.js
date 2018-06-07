@@ -14,14 +14,13 @@ var path=require("path");
  * @param y         y坐标
  */
 
+var count=0;
 function cropImg(srcImg,destImg,x, y) {
 	return new Promise(function(resolve){
-	    setTimeout(function(){
-            gm('image/map19.png').resize(Math.pow(2,l-startLevel)*2*256,null).crop(256, 256, x, y).write(destImg, function (err) {
-                console.log(destImg);
-                resolve(err);
-            });
-        },20)
+		gm(srcImg).resize(Math.pow(2,l-startLevel)*2*256,Math.pow(2,l-startLevel)*2*256).crop(256, 256, x, y).write(destImg, function (err) {
+			console.log(destImg);
+			resolve(err);
+		});
 	})
 }
 async function createWp(srcImg,level,row,col){
@@ -43,25 +42,26 @@ var endRow=114174*2;
 var startCol=214056*2;
 var endCol=214063*2;*/
 var startLevel=16;
-var endLevel=19;
+var endLevel=17;
 var l=16;
 
-var startRow=12269;
+var startRow=28542//12269//28542;
 var endRow=12270;
 var startCol=53514;
 var endCol=53515;
 async function init(){
     for(l=startLevel;l<=endLevel;l++){
         var num=Math.pow(2,l-startLevel);
-        for(var row=startRow*num;row<=endRow*num+parseInt(Math.pow(2,l-startLevel-1));row++){
-            for(var col=startCol*num;col<=endCol*num+parseInt(Math.pow(2,l-startLevel-1));col++){
-                await createWp('image/map19.png',l,row,col);
+        for(var row=startRow*num;row<=(startRow*num+Math.pow(2,l-startLevel+1)-1);row++){
+            for(var col=startCol*num;col<=(startCol*num+Math.pow(2,l-startLevel+1)-1);col++){
+                await createWp('image/h19.png',l,row,col);
             }
         }
     }
     console.log('done........');
 }
 init();
+
 
 
 
